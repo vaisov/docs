@@ -14,6 +14,12 @@ If you encounter this issue, you can work around it by installing the initiator 
 | Ubuntu/Debian | `open-iscsi`            | `sudo apt install open-iscsi`          |
 | RHEL          | `iscsi-initiator-utils` | `yum install iscsi-initiator-utils -y` |
 
+Enable iscsi tcp module on the nodes to avoid getting error `output: iscsiadm: Could not load transport tcp.Dropping interface default.`:
+
+```
+modprobe iscsi_tcp
+echo iscsi_tcp >/etc/modules-load.d/iscsi-tcp.conf
+```
 
 After installing the initiator tool on your nodes, edit the YAML for your cluster, editing the kubelet configuration to mount the iSCSI binary and configuration, as shown in the sample below.
 
